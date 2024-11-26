@@ -1,0 +1,70 @@
+// Create Database
+-- Database: taskmgtDB
+
+-- DROP DATABASE IF EXISTS "taskmgtDB";
+
+CREATE DATABASE "taskmgtDB"
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_United States.1252'
+    LC_CTYPE = 'English_United States.1252'
+    LOCALE_PROVIDER = 'libc'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+// Create Tables
+-- Table: public.usertb
+
+-- DROP TABLE IF EXISTS public.usertb;
+
+CREATE TABLE IF NOT EXISTS public.usertb
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    name text COLLATE pg_catalog."default",
+    email text COLLATE pg_catalog."default"
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.usertb
+    OWNER to postgres;
+
+------------------------------------------------------------------------------------------------------------------------------
+
+-- Table: public.tasktb
+
+-- DROP TABLE IF EXISTS public.tasktb;
+
+CREATE TABLE IF NOT EXISTS public.tasktb
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    title text COLLATE pg_catalog."default",
+    description text COLLATE pg_catalog."default",
+    is_completed boolean DEFAULT false
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tasktb
+    OWNER to postgres;
+
+------------------------------------------------------------------------------------------------------------------------------
+
+-- Table: public.usertasktb
+
+-- DROP TABLE IF EXISTS public.usertasktb;
+
+CREATE TABLE IF NOT EXISTS public.usertasktb
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    taskid integer,
+    userid integer
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.usertasktb
+    OWNER to postgres;
